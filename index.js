@@ -10,18 +10,29 @@ app.get('/', function(req, res) {
 });
 
 app.get('/calc', function(req, res) {
-    exec(` eslint . --no-color -o lastLint.st`, (err, stdout, stderr) => {
+    exec(`cleartool update`, () => {
+      exec(`eslint . --no-color -o lastLint.st`, () => {
         fs.readFile('lastLint.st', 'utf8', (err, contents) => res.send(parse(contents)));
-    })
-  });
+      }
+    )
+  })
+});
 
 app.get('/old', function(req, res) {
-  fs.readFile('lastLint.st', 'utf8', (err, contents) => res.send(parse(contents)));
+  res.send(parseFile());
 });
 
 app.listen(3000, function () {
     console.log('Start listening on port 3000!');
   });
+
+function parseFile() {
+  const readedFile = fs.readFileSync('lastLint.st', 'utf8');
+  const result = parse(readedFile);
+  console.log(result);
+
+  return result;
+}
 
 function parse(contents) {
     const arrayLines = contents.split('\n');
@@ -32,7 +43,6 @@ function parse(contents) {
       info: parseFirst(arrayLastLines),
       fix: parseSecond(arrayLastLines)
     }
-    console.log(result);
 
     return result;
 }
