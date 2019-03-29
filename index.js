@@ -2,34 +2,85 @@ const express = require('express');
 const app = express();
 const { exec } = require('child_process');
 var fs = require('fs');
+const { format, render, cancel, register } = require('timeago.js');
 
 const pathView = 'C:\\inetpub\\getcaesar_eslint_view';
 
-app.get('/', function(req, res) {
-  res.send('hello world');
+app.engine('ntl', function (filePath, options, callback) {
+  fs.readFile(filePath, function (err, template) {
+    if (err) {
+      console.log('Tets');
+      return callback(new Error(err));
+    }
+
+    let rendered = template.toString();
+    const opt = options.options;
+    console.log(opt);
+
+    for (const key in opt) {
+      rendered = rendered.replace(`#${key}#`, opt[key])
+    }
+
+    return callback(null, rendered);
+  });
 });
 
-app.get('/calc', function(req, res) {
+
+app.set('views', './views');
+app.set('view engine', 'ntl');
+
+app.get('/', function(req, res) {
+  const last = getLast();
+  console.log(last);
+
+  res.render('index', {
+    options: {
+      allProblems: last.info.problems,
+      errors: last.info.errors,
+      warns: last.info.warnings,
+      fixErrors: last.fix.errors,
+      fixWarns: last.fix.warnings,
+      time: format(last.date)
+    }
+  });
+});
+
+app.get('/new', function(req, res) {
     exec(`cleartool update`, () => {
       exec(`eslint . --no-color -o lastLint.st`, () => {
-        fs.readFile('lastLint.st', 'utf8', (err, contents) => res.send(parse(contents)));
+        res.send(parseFile());
       }
     )
   })
 });
 
-app.get('/old', function(req, res) {
-  res.send(parseFile());
+app.get('/last', function(req, res) {
+  const result = getLast();
+  res.send(result);
 });
+
+app.get('/all', function(req, res) {
+  const result = JSON.parse(fs.readFileSync('info.json', 'utf8'));
+  res.send(result);
+});
+
 
 app.listen(3000, function () {
     console.log('Start listening on port 3000!');
   });
 
+function getLast() {
+  const infoObject = JSON.parse(fs.readFileSync('info.json', 'utf8')).history;
+  return infoObject[infoObject.length - 1];
+}
+
 function parseFile() {
   const readedFile = fs.readFileSync('lastLint.st', 'utf8');
   const result = parse(readedFile);
-  console.log(result);
+
+  const infoObject = JSON.parse(fs.readFileSync('info.json', 'utf8'));
+  infoObject.history.push(result);
+  fs.writeFileSync("info.json", JSON.stringify(infoObject, null, '\t'))
 
   return result;
 }
@@ -40,6 +91,7 @@ function parse(contents) {
     const arrayLastLines = arrayLines.slice(lLines - 3, lLines - 1);
 
     const result = {
+      date: new Date(),
       info: parseFirst(arrayLastLines),
       fix: parseSecond(arrayLastLines)
     }
