@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+        html,body {
+            height: 100%;
+        }
+        body {
+            display: flex;
+        }
+        .container, .card {
+            margin: auto;
+            width: 450px;
+        }
+        .all-problems {
+            font-size: 3em;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="card text-center">
+        <div class="card-header">
+            Featured
+        </div>
+        <div class="card-body">
+                <div class="row">
+                    <div class="col-7 all-problems">#allProblems#</div>
+                    <div class="col-5">
+                        <div class="row">
+                            <div class="col-12">
+                                <span>errors:</span>
+                                #errors#
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <span>warnings:</span>
+                                #warns#
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-7">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-7">fix error:</div>
+                                    <div class="col-5">#fixErrors#</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-7">fix warnings:</div>
+                                    <div class="col-5">#fixWarns#</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <button class="btn btn-light" disabled>
+                            REBOOT
+                        </button>
+                    </div>
+                </div>
+        </div>
+        <div class="card-footer text-muted">
+            #time#
+        </div>
+    </div>
+</body>
+</html>
