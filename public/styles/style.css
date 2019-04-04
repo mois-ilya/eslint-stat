@@ -1,0 +1,117 @@
+html, body {
+    height: 100%;
+    font-family: Helvetica, Arial;
+  }
+
+  body {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+       -moz-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    /* background-color: rgb(59,63,65); */
+  }
+
+  .container, .card {
+    margin: auto;
+    width: 450px;
+  }
+
+  .card-body {
+    display: -ms-grid;
+    display: grid;
+    /* background-color: rgb(43,43,43); */
+    -ms-grid-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 1fr, 1fr, 1fr, 1fr, 1fr;
+  }
+
+  .card-header, .card-body {
+    /* color: rgb(187,187,187); */
+  }
+
+  .card-header, .card-footer {
+    /* background-color: rgb(49,51,53); */
+  }
+
+  .card {
+    /* background-color: rgb(50,50,49); */
+  }
+
+  .label-problems {
+    font-size: 3em;
+    -ms-grid-row: 1;
+        grid-row-start: 1;
+    -ms-grid-row-span: 3;
+    grid-row-end: 4;
+    font-weight: bold;
+  }
+
+  .button-box {
+    -ms-grid-column: 2;
+        grid-column-start: 2;
+    -ms-grid-column-span: 0;
+    grid-column-end: 2;
+    -ms-grid-row: 4;
+        grid-row-start: 4;
+    -ms-grid-row-span: 3;
+    grid-row-end: 7;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+       -moz-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+       -moz-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+
+  .all-problems {
+    -ms-grid-column: 2;
+    grid-column: 2;
+  }
+  .all-problems__label {
+    -ms-grid-row: 1;
+    grid-row: 1;
+  }
+  .all-problems__errors {
+    -ms-grid-row: 2;
+    grid-row: 2;
+    color: DarkRed;
+  }
+  .all-problems__warnings {
+    -ms-grid-row: 3;
+    grid-row: 3;
+    color: DarkGoldenRod;
+  }
+
+  .fixible-problems {
+    -ms-grid-column: 1;
+    grid-column: 1;
+  }
+  .fixible-problems__label {
+    -ms-grid-row: 4;
+    grid-row: 4;
+  }
+  .fixible-problems__errors {
+    -ms-grid-row: 5;
+    grid-row: 5;
+    color: DarkRed;
+  }
+  .fixible-problems__warnings {
+    -ms-grid-row: 6;
+    grid-row: 6;
+    color: DarkGoldenRod;
+  }

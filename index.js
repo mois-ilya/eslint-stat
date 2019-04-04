@@ -4,7 +4,7 @@ const { exec } = require('child_process');
 var fs = require('fs');
 const { format, render, cancel, register } = require('timeago.js');
 
-const pathView = 'C:\\inetpub\\getcaesar_eslint_view';
+app.use(express.static('public'));
 
 app.engine('ntl', function (filePath, options, callback) {
   fs.readFile(filePath, function (err, template) {
@@ -24,7 +24,6 @@ app.engine('ntl', function (filePath, options, callback) {
     return callback(null, rendered);
   });
 });
-
 
 app.set('views', './views');
 app.set('view engine', 'ntl');

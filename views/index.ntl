@@ -4,103 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-    <style>
-        html,body {
-            height: 100%;
-            font-family: Helvetica, Arial;
-        }
-        body {
-            display: flex;
-            /* background-color: rgb(59,63,65); */
-        }
-        .container, .card {
-            margin: auto;
-            width: 450px;
-        }
-        .all-problems {
-            font-size: 3em;
-            /* color: red; */
-            grid-row-start: 1;
-            grid-row-end: 4;
-            font-weight: bold;
-        }
-
-        .card-body {
-            /* border: 1px solid #000; */
-            display: grid;
-            /* background-color: rgb(43,43,43); */
-            /* width: 450px; */
-            grid-template-columns: 1fr 1fr;
-            grid-auto-rows: 1fr,1fr,1fr,1fr,1fr;
-        }
-
-        .card-header, .card-body {
-            /* color: rgb(187,187,187); */
-        }
-
-        .card-header, .card-footer {
-            /* background-color: rgb(49,51,53); */
-        }
-
-        .card {
-            /* background-color: rgb(50,50,49); */
-        }
-
-        .button-box {
-            grid-column-start: 2;
-            grid-column-end: 2;
-            grid-row-start: 4;
-            grid-row-end: 7;
-            display: grid;
-        }
-
-        .center {
-            align-self: center;
-            justify-self: center;
-        }
-
-        .errors {
-            color: DarkRed;
-        }
-
-        .warnings {
-            color: DarkGoldenRod;
-        }
-    </style>
+    <title>ESLint Problems</title>
+    <link rel="stylesheet" href="./styles/bootstrap.css">
+    <link rel="stylesheet" href="./styles/style.css">
 </head>
+
 <body>
     <div class="card text-center">
         <div class="card-header">
             ESLint Problems
         </div>
         <div class="card-body">
-            <div class="all-problems">#allProblems#</div>
+            <div class="label-problems">#allProblems#</div>
+            <div class="all-problems all-problems__label">All problems:</div>
+            <div class="all-problems all-problems__errors">#errors# errors</div>
+            <div class="all-problems all-problems__warnings">#warns# warnings</div>
+            <div class="fixible-problems fixible-problems__label">Fixible problems:</div>
+            <div class="fixible-problems fixible-problems__errors">#fixErrors# errors</div>
+            <div class="fixible-problems fixible-problems__warnings">#fixWarns# warnings</div>
             <div class="button-box">
-                <button class="btn btn-light center" disabled>
+                <button class="btn btn-light newlint">
                     NEW LINT
                 </button>
             </div>
-            <div>All problems:</div>
-            <div class="errors">
-                #errors# errors
-            </div>
-            <div class="warnings">
-                #warns# warnings
-            </div>
-            <div>Fixible problems:</div>
-            <div class="errors">
-                #fixErrors# errors
-            </div>
-            <div class="warnings">
-                #fixWarns# warnings
-            </div>
         </div>
-        <div class="card-footer text-muted">
+        <div class="card-footer text-muted time">
             #time#
         </div>
     </div>
+
+    <script src="./scripts/app.js"></script>
 </body>
 </html>
