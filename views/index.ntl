@@ -19,7 +19,7 @@
             <div class="all-problems all-problems__label">All problems:</div>
             <div class="all-problems all-problems__errors">#errors# errors</div>
             <div class="all-problems all-problems__warnings">#warns# warnings</div>
-            <div class="fixible-problems fixible-problems__label">Fixible problems:</div>
+            <div class="fixible-problems fixible-problems__label">Fixable problems:</div>
             <div class="fixible-problems fixible-problems__errors">#fixErrors# errors</div>
             <div class="fixible-problems fixible-problems__warnings">#fixWarns# warnings</div>
             <div class="button-box">

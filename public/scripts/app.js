@@ -13,7 +13,9 @@ newlint.addEventListener('click', () => {
 
     fetch('/new')
         .then(response => {
-            const data = response.json();
+            return response.json();
+        })
+        .then(data => {
             replaceData(data);
         })
         .catch(() => {

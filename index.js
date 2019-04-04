@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const { exec } = require('child_process');
 var fs = require('fs');
-const { format, render, cancel, register } = require('timeago.js');
+const { format } = require('timeago.js');
 
 app.use(express.static('public'));
 
@@ -30,7 +30,6 @@ app.set('view engine', 'ntl');
 
 app.get('/', function(req, res) {
   const last = getLast();
-  console.log(last);
 
   res.render('index', {
     options: {
