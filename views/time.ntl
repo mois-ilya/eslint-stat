@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css">
+    <title>Document</title>
+</head>
+<body style="max-width: 600px; max-height: 600px">
+    <canvas id="myChart" width="400" height="400"></canvas>
+
+    <script>
+    const allData = #history#;
+    const ctx = document.getElementById('myChart');
+    const data = allData.history.map(item => new Object({
+        x: new Date(item.date),
+        y: item.info.problems
+    }))
+
+    var chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            datasets: [{
+                label: 'Dataset with string point data',
+                backgroundColor: "red",
+                borderColor: "red",
+                fill: false,
+                data: data
+            }]
+        },
+        options: {
+            responsive: true,
+            title: {
+                display: true,
+                text: 'Chart.js Time Point Data'
+            },
+            scales: {
+                xAxes: [{
+                    type: 'time',
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Date'
+                    },
+                    ticks: {
+                        major: {
+                            fontStyle: 'bold',
+                            fontColor: '#FF0000'
+                        }
+                    }
+                }],
+                yAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'value'
+                    }
+                }]
+            }
+        }
+    });
+</script>
+</body>
+</html>

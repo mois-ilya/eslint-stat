@@ -15,7 +15,6 @@ app.engine('ntl', function (filePath, options, callback) {
 
     let rendered = template.toString();
     const opt = options.options;
-    console.log(opt);
 
     for (const key in opt) {
       rendered = rendered.replace(`#${key}#`, opt[key])
@@ -38,19 +37,24 @@ app.get('/', function(req, res) {
       warns: last.info.warnings,
       fixErrors: last.fix.errors,
       fixWarns: last.fix.warnings,
-      time: format(last.date)
+      time: format(last.date),
+      vconfig: last.vconfig
     }
   });
 });
 
-app.get('/new', function(req, res) {
-    exec(`cleartool update`, () => {
-      exec(`eslint . --no-color -o lastLint.st`, () => {
-        res.send(parseFile());
-      }
-    )
-  })
+
+app.get('/time', function(req, res) {
+  const history = fs.readFileSync('info.json', 'utf8');
+
+  res.render('time', {
+    options: {
+      history
+    }
+  });
 });
+
+app.get('/new', newLint);
 
 app.get('/last', function(req, res) {
   const result = getLast();
@@ -68,22 +72,37 @@ app.listen(3000, function () {
   });
 
 function getLast() {
-  const infoObject = JSON.parse(fs.readFileSync('info.json', 'utf8')).history;
-  return infoObject[infoObject.length - 1];
+  const infoObjectH = JSON.parse(fs.readFileSync('info.json', 'utf8')).history;
+  return infoObjectH[infoObjectH.length - 1];
 }
 
-function parseFile() {
-  const readedFile = fs.readFileSync('lastLint.st', 'utf8');
-  const result = parse(readedFile);
+function newLint(req, res) {
+  exec(`cleartool update`, () => {
+      exec(`describe.bat`, (error, r) => {
+        const tag = r.split('\n')[0];
+        const infoObject = JSON.parse(fs.readFileSync('info.json', 'utf8'));
 
-  const infoObject = JSON.parse(fs.readFileSync('info.json', 'utf8'));
-  infoObject.history.push(result);
-  fs.writeFileSync("info.json", JSON.stringify(infoObject, null, '\t'))
+        if (infoObject.vconfig !== tag) {
+            fs.copyFileSync('../.eslintrc.json', '.eslintrc.json');
+            infoObject.vconfig = tag;
+            console.log('config updated');
+        }
 
-  return result;
+        exec(`eslint . --no-color -o lastLint.st`, () => {
+          console.log('lint complited');
+          const readedFile = fs.readFileSync('lastLint.st', 'utf8');
+          const result = parse(readedFile, tag);
+
+          infoObject.history.push(result);
+          fs.writeFileSync("info.json", JSON.stringify(infoObject, null, '\t'))
+
+          res.send(result);
+      })
+    })
+  })
 }
 
-function parse(contents) {
+function parse(contents, vconfig) {
     const arrayLines = contents.split('\n');
     const lLines = arrayLines.length;
     const arrayLastLines = arrayLines.slice(lLines - 3, lLines - 1);
@@ -91,7 +110,8 @@ function parse(contents) {
     const result = {
       date: new Date(),
       info: parseFirst(arrayLastLines),
-      fix: parseSecond(arrayLastLines)
+      fix: parseSecond(arrayLastLines),
+      vconfig: vconfig
     }
 
     return result;

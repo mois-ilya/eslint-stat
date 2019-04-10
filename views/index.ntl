@@ -12,7 +12,7 @@
 <body>
     <div class="card text-center">
         <div class="card-header">
-            ESLint Problems
+            ESLint Problems #vconfig#
         </div>
         <div class="card-body">
             <div class="label-problems">#allProblems#</div>
