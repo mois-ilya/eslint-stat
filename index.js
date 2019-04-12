@@ -1,8 +1,11 @@
-const express = require('express');
-const app = express();
+const fs = require('fs');
 const { exec } = require('child_process');
-var fs = require('fs');
+const express = require('express');
 const { format } = require('timeago.js');
+
+const app = express();
+
+const cwd = 'C:\\inetpub\\getcaesar_eslint_view';
 
 app.use(express.static('public'));
 
@@ -77,7 +80,7 @@ function getLast() {
 }
 
 function newLint(req, res) {
-  exec(`cleartool update`, () => {
+  exec(`cleartool update`, {cwd: cwd}, () => {
       exec(`describe.bat`, (error, r) => {
         const tag = r.split('\n')[0];
         const infoObject = JSON.parse(fs.readFileSync('info.json', 'utf8'));
@@ -88,7 +91,7 @@ function newLint(req, res) {
             console.log('config updated');
         }
 
-        exec(`eslint . --no-color -o lastLint.st`, () => {
+        exec(`eslint . --no-color -o ${__dirname}/lastLint.st`, {cwd: cwd}, () => {
           console.log('lint complited');
           const readedFile = fs.readFileSync('lastLint.st', 'utf8');
           const result = parse(readedFile, tag);
