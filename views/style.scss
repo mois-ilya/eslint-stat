@@ -1,12 +1,42 @@
 html,body {
     height: 100%;
     font-family: Helvetica, Arial;
+    transition: color 0.3s;
 }
-body {
+
+* {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+:root {
+    --color-header: rgb(33, 37, 41);
+    --color-body: #FFF;
+    --color-body-card: #FFF;
+    --color-label: rgb(33, 37, 41);
+    --color-main: #FFF;
+}
+
+#mode:checked ~ .wrapper {
+    --color-header: rgb(187,187,187);
+    --color-body: rgb(43,43,43);
+    --color-body-card: rgb(50,50,49);
+    --color-label: #ccc;
+    --color-main: rgb(59,63,65);
+}
+
+#mode {
+    top: 0;
+    position: absolute;
+}
+
+.wrapper {
+    height: 100vh;
+    width: 100vw;
     display: flex;
     align-items: center;
-    /* background-color: rgb(59,63,65); */
+    background-color: var(--color-main);
 }
+
 .container, .card {
     margin: auto;
     width: 450px;
@@ -14,21 +44,21 @@ body {
 
 .card-body {
     display: grid;
-    /* background-color: rgb(43,43,43); */
+    background-color: var(--color-body);
     grid-template-columns: 1fr 1fr;
     grid-auto-rows: 1fr,1fr,1fr,1fr,1fr;
 }
 
-.card-header, .card-body {
-    /* color: rgb(187,187,187); */
+.card-header, .card-footer {
+    color: var(--color-header);
 }
 
-.card-header, .card-footer {
-    /* background-color: rgb(49,51,53); */
-}
+// .card-header, .card-footer {
+//     /* background-color: rgb(49,51,53); */
+// }
 
 .card {
-    /* background-color: rgb(50,50,49); */
+    background-color: var(--color-body-card);
 }
 
 .label-problems {
@@ -36,6 +66,7 @@ body {
     grid-row-start: 1;
     grid-row-end: 4;
     font-weight: bold;
+    color: var(--color-label);
 }
 
 .button-box {
@@ -53,6 +84,7 @@ body {
 
     &__label {
         grid-row: 1;
+        color: var(--color-label);
     }
 
     &__errors {
@@ -71,6 +103,7 @@ body {
 
     &__label {
         grid-row: 4;
+        color: var(--color-label);
     }
 
     &__errors {
@@ -81,5 +114,23 @@ body {
     &__warnings {
         grid-row: 6;
         color: DarkGoldenRod;
+    }
+}
+
+@media (prefers-color-scheme: dark){
+    :root{
+        --color-header: rgb(187,187,187);
+        --color-body: rgb(43,43,43);
+        --color-body-card: rgb(50,50,49);
+        --color-label: #ccc;
+        --color-main: rgb(59,63,65);
+    }
+
+    #mode:checked ~ .wrapper {
+        --color-header: rgb(33, 37, 41);
+        --color-body: #FFF;
+        --color-body-card: #FFF;
+        --color-label: rgb(33, 37, 41);
+        --color-main: #FFF;
     }
 }

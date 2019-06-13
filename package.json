@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch": "nodemon --watch app",
+    "scss": "npx node-sass --include-path node_modules --output-style nested views/style.scss > public/styles/style.css"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,11 @@
   "homepage": "https://github.com/mois-ilya/eslint-stat#readme",
   "devDependencies": {
     "express": "^4.16.4",
+    "node-sass": "^4.12.0",
+    "nodemon": "^1.19.1"
+  },
+  "dependencies": {
+    "npm": "^6.9.0",
     "timeago": "^1.6.5"
   }
 }

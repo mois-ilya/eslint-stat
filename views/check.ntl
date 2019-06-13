@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<!-- saved from url=(0032)http://getit.mois.pro/check.html -->
+<html lang="ru">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+	<title>CheckBox and Radio button</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 25px;
+			font-family: sans-serif;
+		}
+
+		/* Option */
+
+		.option {
+			display: block;
+			margin-bottom: 0.5em;
+		}
+
+		/* Check */
+
+		.check {
+			font-style: normal;
+			font-weight: normal;
+			font-size: 14px;
+			line-height: 20px;
+		}
+
+		.check__input {
+			position: absolute;
+			width: 1px;
+			height: 1px;
+			overflow: hidden;
+			clip: rect(0 0 0 0);
+		}
+
+		.check__input + label {
+			color: #73777C;
+            user-select: none;
+			padding-left: 28px;
+			font-family: Roboto, sans-serif;
+		}
+
+		.check__input--error + label {
+			color: #F26A6B;
+		}
+
+		.check__input:checked + label {
+			color: #73777C;
+		}
+
+		.check__radio, .check__box {
+			position: absolute;
+			margin-left: -28px;
+		}
+
+		.check__box {
+            padding-left: 1px;
+			width: 18px;
+			height: 18px;
+		}
+
+		.check__radio {
+			width: 20px;
+			height: 20px;
+		}
+
+		/* CHECKBOX */
+
+		.check__box {
+			fill: #73777C;
+		}
+
+		.check__input--error + label .check__box {
+			fill: #F26A6B;
+		}
+
+		.check__input--mixed + label .check__box .check__mixed {
+			stroke: #73777C;
+		}
+
+
+		/* Checked */
+
+		.check__input:checked + label .check__box {
+			fill: #73777C;
+		}
+
+		.check__input:checked + label .check__box .check__mark {
+			stroke: #73777C;
+		}
+
+		.check__input:checked + label .check__box .check__border2 {
+			fill: none;
+		}
+
+		.check__input--mixed:checked + label .check__box .check__mixed {
+			stroke: none;
+		}
+
+		/* Focused */
+
+		.check__input:focus + label {
+			color: #ff00ff;
+		}
+
+		.check__input:focus + label .check__box {
+			fill: #ff00ff;
+		}
+
+		.check__input:checked:focus + label .check__box .check__mark {
+			stroke: #ff00ff;
+		}
+
+		.check__input--mixed:focus + label .check__box .check__mixed {
+			stroke: #ff00ff;
+		}
+
+		.check__input--mixed:checked:focus + label .check__box .check__mixed {
+			stroke: none;
+		}
+
+		/* Disabled */
+
+		.check__input:disabled + label {
+			color: #D1DADE;
+		}
+
+		.check__input:disabled + label .check__box {
+			fill: #D1DADE;
+		}
+
+		.check__input:disabled:checked + label .check__box .check__mark {
+			stroke: #D1DADE;
+		}
+
+		.check__input--mixed:disabled + label .check__box .check__mixed {
+			stroke: #D1DADE;
+		}
+
+
+		/* RADIO */
+		.check__radio {
+			fill: #73777C;
+		}
+
+		.check__input--error + label .check__radio {
+			fill: #F26A6B;
+		}
+
+		/* Checked */
+
+		.check__input:checked + label .check__radio {
+			fill: #73777C;
+		}
+
+		.check__input:checked + label .check__radio .check__mark {
+			fill: #73777C;
+		}
+
+		/* Focused */
+
+		.check__input:focus + label .check__radio {
+			fill: #ff00ff;
+		}
+
+		.check__input:checked:focus + label .check__radio .check__mark {
+			fill: #ff00ff;
+		}
+
+		/* Disabled */
+
+		.check__input:disabled + label .check__radio {
+			fill: #D1DADE;
+		}
+
+		.check__input:disabled:checked + label .check__radio .check__mark {
+			fill: #D1DADE;
+		}
+	</style>
+</head>
+<body>
+
+	<h5>Checkbox</h5>
+	<div class="check option">
+		<input class="check__input" id="id1" type="checkbox">
+		<label for="id1">
+			<svg focusable="false" class="check__box" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+				<polyline class="check__mark" points="4.2 7.8 8 11.6 17.3 2.3" stroke-width="2" fill="none"></polyline>
+				<path class="check__border1" d="M16 16H2V2H12V0H2C0.9 0 0 0.9 0 2V16C0 17.1 0.9 18 2 18H16C17.1 18 18 17.1 18 16V8H16V16V16Z"/>
+				<path class="check__border2" d="M12 0V2L16 2L16 8H18V1.9976C17.9987 0.89869 17.0992 0 16 0H12Z"/>
+				<polyline class="check__mixed" points="4 9 14 9" stroke-width="2" fill="none"></polyline>
+			</svg>
+			Checkbox
+		</label>
+	</div>
+	<div class="check option">
+		<input class="check__input" id="id2" type="checkbox" checked="">
+		<label for="id2">
+			<svg focusable="false" class="check__box" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+				<polyline class="check__mark" points="4.2 7.8 8 11.6 17.3 2.3" stroke-width="2" fill="none"></polyline>
+				<path class="check__border1" d="M16 16H2V2H12V0H2C0.9 0 0 0.9 0 2V16C0 17.1 0.9 18 2 18H16C17.1 18 18 17.1 18 16V8H16V16V16Z"/>
+				<path class="check__border2" d="M12 0V2L16 2L16 8H18V1.9976C17.9987 0.89869 17.0992 0 16 0H12Z"/>
+				<polyline class="check__mixed" points="4 9 14 9" stroke-width="2" fill="none"></polyline>
+			</svg>
+			Checkbox
+		</label>
+	</div>
+	<div class="check option">
+		<input class="check__input check__input--mixed" id="id3" type="checkbox">
+		<label for="id3">
+			<svg focusable="false" class="check__box" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+				<polyline class="check__mark" points="4.2 7.8 8 11.6 17.3 2.3" stroke-width="2" fill="none"></polyline>
+				<path class="check__border1" d="M16 16H2V2H12V0H2C0.9 0 0 0.9 0 2V16C0 17.1 0.9 18 2 18H16C17.1 18 18 17.1 18 16V8H16V16V16Z"/>
+				<path class="check__border2" d="M12 0V2L16 2L16 8H18V1.9976C17.9987 0.89869 17.0992 0 16 0H12Z"/>
+				<polyline class="check__mixed" points="4 9 14 9" stroke-width="2" fill="none"></polyline>
+			</svg>
+			Checkbox
+		</label>
+	</div>
+	<div class="check option">
+		<input class="check__input check__input--mixed" id="idm2" type="checkbox" disabled="">
+		<label for="idm2">
+			<svg focusable="false" class="check__box" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+				<polyline class="check__mark" points="4.2 7.8 8 11.6 17.3 2.3" stroke-width="2" fill="none"></polyline>
+				<path class="check__border1" d="M16 16H2V2H12V0H2C0.9 0 0 0.9 0 2V16C0 17.1 0.9 18 2 18H16C17.1 18 18 17.1 18 16V8H16V16V16Z"/>
+				<path class="check__border2" d="M12 0V2L16 2L16 8H18V1.9976C17.9987 0.89869 17.0992 0 16 0H12Z"/>
+				<polyline class="check__mixed" points="4 9 14 9" stroke-width="2" fill="none"></polyline>
+			</svg>
+			Checkbox
+		</label>
+	</div>
+	<div class="check option">
+		<input class="check__input" id="idm3" type="checkbox" disabled="">
+		<label for="idm3">
+			<svg focusable="false" class="check__box" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+				<polyline class="check__mark" points="4.2 7.8 8 11.6 17.3 2.3" stroke-width="2" fill="none"></polyline>
+				<path class="check__border1" d="M16 16H2V2H12V0H2C0.9 0 0 0.9 0 2V16C0 17.1 0.9 18 2 18H16C17.1 18 18 17.1 18 16V8H16V16V16Z"/>
+				<path class="check__border2" d="M12 0V2L16 2L16 8H18V1.9976C17.9987 0.89869 17.0992 0 16 0H12Z"/>
+				<polyline class="check__mixed" points="4 9 14 9" stroke-width="2" fill="none"></polyline>
+			</svg>
+			Checkbox
+		</label>
+	</div>
+	<div class="check option">
+		<input class="check__input" id="id4" type="checkbox" checked="" disabled="">
+		<label for="id4">
+			<svg focusable="false" class="check__box" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+				<polyline class="check__mark" points="4.2 7.8 8 11.6 17.3 2.3" stroke-width="2" fill="none"></polyline>
+				<path class="check__border1" d="M16 16H2V2H12V0H2C0.9 0 0 0.9 0 2V16C0 17.1 0.9 18 2 18H16C17.1 18 18 17.1 18 16V8H16V16V16Z"/>
+				<path class="check__border2" d="M12 0V2L16 2L16 8H18V1.9976C17.9987 0.89869 17.0992 0 16 0H12Z"/>
+				<polyline class="check__mixed" points="4 9 14 9" stroke-width="2" fill="none"></polyline>
+			</svg>
+			Checkbox
+		</label>
+	</div>
+	<h5>Radio button</h5>
+	<div class="check option">
+		<input class="check__input" id="id5" type="radio" name="radioButton">
+		<label for="id5">
+			<svg focusable="false" class="check__radio" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+				<path class="check__border1" d="M10 0C4.5 0 0 4.5 0 10s4.5 10 10 10 10-4.5 10-10S15.5 0 10 0zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8z" ></path>
+				<path class="check__mark" d="M10 5c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm0-5" fill="none" ></path>
+			</svg>
+			Radio
+		</label>
+	</div>
+	<div class="check option">
+		<input class="check__input" id="id6" type="radio" name="radioButton" checked="">
+		<label for="id6">
+			<svg focusable="false" class="check__radio" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+				<path class="check__border1" d="M10 0C4.5 0 0 4.5 0 10s4.5 10 10 10 10-4.5 10-10S15.5 0 10 0zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8z" ></path>
+				<path class="check__mark" d="M10 5c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm0-5" fill="none"></path>
+			</svg>
+			Radio
+		</label>
+	</div>
+	<div class="check option">
+		<input class="check__input" id="id5" type="radio" name="radioButton2" disabled="">
+		<label for="id7">
+			<svg focusable="false" class="check__radio" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+				<path class="check__border1" d="M10 0C4.5 0 0 4.5 0 10s4.5 10 10 10 10-4.5 10-10S15.5 0 10 0zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8z" ></path>
+				<path class="check__mark" d="M10 5c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm0-5" fill="none"  ></path>
+			</svg>
+			Radio
+		</label>
+	</div>
+	<div class="check option">
+		<input class="check__input" id="id6" type="radio" name="radioButton2" checked="" disabled="">
+		<label for="id8">
+			<svg focusable="false" class="check__radio" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+				<path class="check__border1" d="M10 0C4.5 0 0 4.5 0 10s4.5 10 10 10 10-4.5 10-10S15.5 0 10 0zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8z" ></path>
+				<path class="check__mark" d="M10 5c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm0-5" fill="none"  ></path>
+			</svg>
+			Radio
+		</label>
+	</div>
+
+<h5>Error</h5>
+	<div class="check option">
+		<input class="check__input check__input--error" id="idcm1" type="checkbox">
+		<label for="idcm1">
+			<svg focusable="false" class="check__box" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+				<polyline class="check__mark" points="4.2 7.8 8 11.6 17.3 2.3" stroke-width="2" fill="none"></polyline>
+				<path class="check__border1" d="M16 16H2V2H12V0H2C0.9 0 0 0.9 0 2V16C0 17.1 0.9 18 2 18H16C17.1 18 18 17.1 18 16V8H16V16V16Z"/>
+				<path class="check__border2" d="M12 0V2L16 2L16 8H18V1.9976C17.9987 0.89869 17.0992 0 16 0H12Z"/>
+				<polyline class="check__mixed" points="4 9 14 9" stroke-width="2" fill="none"></polyline>
+			</svg>
+			Checkbox
+		</label>
+	</div>
+	<div class="check option">
+		<input class="check__input check__input--error" id="idcm6" type="radio" name="radioButton3">
+		<label for="idcm6">
+			<svg focusable="false" class="check__radio" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+				<path class="check__border1" d="M10 0C4.5 0 0 4.5 0 10s4.5 10 10 10 10-4.5 10-10S15.5 0 10 0zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8z" ></path>
+				<path class="check__mark" d="M10 5c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm0-5" fill="none"  ></path>
+			</svg>
+			Radio
+		</label>
+	</div>
+
+    <!-- <script>
+        function blurFocus(params) {
+            this.blur();
+        }
+        var inputs = document.querySelectorAll('.check__input');
+        for (let i = 0; 0 < inputs.length; i++) {
+            input = inputs[i];
+            input.addEventListener('click', blurFocus)
+        }
+    </script> -->
+</body></html>

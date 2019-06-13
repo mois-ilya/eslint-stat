@@ -1,11 +1,13 @@
 const fs = require('fs');
-const { exec } = require('child_process');
+const path = require('path');
+const { execSync, exec } = require('child_process');
 const express = require('express');
 const { format } = require('timeago.js');
 
 const app = express();
 
 const cwd = 'C:\\inetpub\\getcaesar_eslint_view';
+execSync(`npm run scss`);
 
 app.use(express.static('public'));
 
@@ -46,6 +48,18 @@ app.get('/', function(req, res) {
   });
 });
 
+app.get('/check', function(req, res) {
+  res.render('check');
+});
+
+app.get('/config', function(req, res) {
+  const config = JSON.parse(fs.readFileSync('/public/eslintrc.json', 'utf8'));
+  res.send(config);
+});
+
+app.get('/eslintrc', function(req, res) {
+  res.sendFile(path.resolve('public/eslintrc.json'));
+});
 
 app.get('/time', function(req, res) {
   const history = fs.readFileSync('info.json', 'utf8');
@@ -69,7 +83,6 @@ app.get('/all', function(req, res) {
   res.send(result);
 });
 
-
 app.listen(3000, function () {
     console.log('Start listening on port 3000!');
   });
@@ -86,7 +99,7 @@ function newLint(req, res) {
         const infoObject = JSON.parse(fs.readFileSync('info.json', 'utf8'));
 
         if (infoObject.vconfig !== tag) {
-            fs.copyFileSync('../.eslintrc.json', '.eslintrc.json');
+            fs.copyFileSync('../../.eslintrc.json', 'public/eslintrc.json');
             infoObject.vconfig = tag;
             console.log('config updated');
         }
