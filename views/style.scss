@@ -10,6 +10,7 @@ html,body {
 
 :root {
     --color-header: rgb(33, 37, 41);
+    --color-button: rgb(33, 37, 41);
     --color-body: #FFF;
     --color-body-card: #FFF;
     --color-label: rgb(33, 37, 41);
@@ -18,6 +19,7 @@ html,body {
 
 #mode:checked ~ .wrapper {
     --color-header: rgb(187,187,187);
+    --color-button: #f8f9fa;
     --color-body: rgb(43,43,43);
     --color-body-card: rgb(50,50,49);
     --color-label: #ccc;
@@ -25,9 +27,14 @@ html,body {
 }
 
 #mode {
-    top: 0;
+    bottom: 20px;
+    right: 20px;
     position: absolute;
 }
+
+// .btn {
+//     background-color: var(--color-button);
+// }
 
 .wrapper {
     height: 100vh;
@@ -52,10 +59,6 @@ html,body {
 .card-header, .card-footer {
     color: var(--color-header);
 }
-
-// .card-header, .card-footer {
-//     /* background-color: rgb(49,51,53); */
-// }
 
 .card {
     background-color: var(--color-body-card);
@@ -120,6 +123,7 @@ html,body {
 @media (prefers-color-scheme: dark){
     :root{
         --color-header: rgb(187,187,187);
+        --color-button: #f8f9fa;
         --color-body: rgb(43,43,43);
         --color-body-card: rgb(50,50,49);
         --color-label: #ccc;
@@ -128,6 +132,7 @@ html,body {
 
     #mode:checked ~ .wrapper {
         --color-header: rgb(33, 37, 41);
+        --color-button: rgb(33, 37, 41);
         --color-body: #FFF;
         --color-body-card: #FFF;
         --color-label: rgb(33, 37, 41);

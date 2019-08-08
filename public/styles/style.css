@@ -8,6 +8,7 @@ html, body {
 
 :root {
   --color-header: rgb(33, 37, 41);
+  --color-button: rgb(33, 37, 41);
   --color-body: #FFF;
   --color-body-card: #FFF;
   --color-label: rgb(33, 37, 41);
@@ -15,13 +16,15 @@ html, body {
 
 #mode:checked ~ .wrapper {
   --color-header: rgb(187,187,187);
+  --color-button: #f8f9fa;
   --color-body: rgb(43,43,43);
   --color-body-card: rgb(50,50,49);
   --color-label: #ccc;
   --color-main: rgb(59,63,65); }
 
 #mode {
-  top: 0;
+  bottom: 20px;
+  right: 20px;
   position: absolute; }
 
 .wrapper {
@@ -90,12 +93,14 @@ html, body {
 @media (prefers-color-scheme: dark) {
   :root {
     --color-header: rgb(187,187,187);
+    --color-button: #f8f9fa;
     --color-body: rgb(43,43,43);
     --color-body-card: rgb(50,50,49);
     --color-label: #ccc;
     --color-main: rgb(59,63,65); }
   #mode:checked ~ .wrapper {
     --color-header: rgb(33, 37, 41);
+    --color-button: rgb(33, 37, 41);
     --color-body: #FFF;
     --color-body-card: #FFF;
     --color-label: rgb(33, 37, 41);

@@ -19,6 +19,7 @@
   "homepage": "https://github.com/mois-ilya/eslint-stat#readme",
   "devDependencies": {
     "express": "^4.16.4",
+    "json-beautify": "^1.1.0",
     "node-sass": "^4.12.0",
     "nodemon": "^1.19.1"
   },

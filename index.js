@@ -3,6 +3,7 @@ const path = require('path');
 const { execSync, exec } = require('child_process');
 const express = require('express');
 const { format } = require('timeago.js');
+const createFileStat = require('./createFileStat.js');
 
 const app = express();
 
@@ -71,21 +72,35 @@ app.get('/time', function(req, res) {
   });
 });
 
+app.get('/ip', (req, res) => {
+  const ip = getClientIp(req);
+  res.send(ip);
+});
+
 app.get('/new', newLint);
 
 app.get('/last', function(req, res) {
-  const result = getLast();
-  res.send(result);
+  const last = JSON.stringify(getLast());
+  res.send(formatJson(last, req));
 });
 
 app.get('/all', function(req, res) {
-  const result = JSON.parse(fs.readFileSync('info.json', 'utf8'));
-  res.send(result);
+  const info = fs.readFileSync('info.json', 'utf8');
+  res.send(formatJson(info, req));
+});
+
+app.get('/fileStat', function(req, res) {
+  const fileStat = fs.readFileSync('fileStat.json', 'utf8');
+  res.send(formatJson(fileStat, req));
 });
 
 app.listen(3000, function () {
     console.log('Start listening on port 3000!');
   });
+
+function formatJson(string, req) {
+  return req.query.format === 'html' ? `<pre><code>${string}</code></pre>` : JSON.parse(string);
+}
 
 function getLast() {
   const infoObjectH = JSON.parse(fs.readFileSync('info.json', 'utf8')).history;
@@ -108,6 +123,7 @@ function newLint(req, res) {
           console.log('lint complited');
           const readedFile = fs.readFileSync('lastLint.st', 'utf8');
           const result = parse(readedFile, tag);
+          createFileStat();
 
           infoObject.history.push(result);
           fs.writeFileSync("info.json", JSON.stringify(infoObject, null, '\t'))
@@ -164,3 +180,21 @@ function parseSecond(original) {
     warnings: str.slice(errorsIndex + errorsLenght, warningsIndex - 1)
   }
 }
+
+function getClientIp(req) {
+  var ipAddress;
+  // The request may be forwarded from local web server.
+  var forwardedIpsStr = req.header('x-forwarded-for');
+  if (forwardedIpsStr) {
+    // 'x-forwarded-for' header may return multiple IP addresses in
+    // the format: "client IP, proxy 1 IP, proxy 2 IP" so take the
+    // the first one
+    var forwardedIps = forwardedIpsStr.split(',');
+    ipAddress = forwardedIps[0];
+  }
+  if (!ipAddress) {
+    // If request was not forwarded
+    ipAddress = req.connection.remoteAddress;
+  }
+  return ipAddress;
+};
