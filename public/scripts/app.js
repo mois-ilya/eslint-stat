@@ -36,20 +36,18 @@ function replaceData(data) {
 
 function initTheme() {
     var globalDarkMode = Boolean(window.matchMedia("(prefers-color-scheme: dark)").matches),
-    isDarkModeUser = false;
+        isDarkModeUser = false;
 
-    // When browser window loads, check User setting of dark mode
     isDarkModeUser = window.localStorage.getItem("flagMode") === "true";
-
     mode.checked = Boolean(isDarkModeUser ^ !globalDarkMode);
     mode.addEventListener('click', toggle);
-}
 
-function toggle() {
-    if (isDarkModeUser) {
-        window.localStorage.setItem("flagMode", "false");
-    } else {
-        window.localStorage.setItem("flagMode", "true");
+    function toggle() {
+        if (isDarkModeUser) {
+            window.localStorage.setItem("flagMode", "false");
+        } else {
+            window.localStorage.setItem("flagMode", "true");
+        }
     }
 }
 

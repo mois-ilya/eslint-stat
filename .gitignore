@@ -7,3 +7,4 @@
 !/views/*
 !/.gitignore
 !/package.json
+!/src
