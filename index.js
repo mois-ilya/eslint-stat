@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const { execSync, exec } = require('child_process');
 const express = require('express');
-const { format } = require('timeago.js');
+const moment = require('moment');
 const createFileStat = require('./createFileStat.js');
 
 const app = express();
@@ -43,7 +43,7 @@ app.get('/', function(req, res) {
       warns: last.info.warnings,
       fixErrors: last.fix.errors,
       fixWarns: last.fix.warnings,
-      time: format(last.date),
+      time: moment(last.date).fromNow(),
       vconfig: last.vconfig
     }
   });
