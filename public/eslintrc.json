@@ -24,6 +24,8 @@
         "Charts": "readonly",
         "JFrame": "readonly",
 
+        "loader": "readonly",
+        "prepareLoginForm": "readonly",
         "doOnChange": "readonly",
         "updateValidationError": "readonly",
         "showMSGText": "readonly",
@@ -45,6 +47,7 @@
         "initAjaxTable": "readonly",
         "initToggleSelectMode": "readonly",
         "initCollapser": "readonly",
+        "initDatepicker": "readonly",
         "initImageSelectContainer": "readonly",
         "initCheckAllChildOnChange": "readonly"
     },

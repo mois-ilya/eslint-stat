@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chart</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0
+        }
+
+        .mois {
+            position: relative;
+            width: 100vw
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mois">
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <script id="data" type="application/json">
+        #data#
+    </script>
+
+    <script>
+        const data = JSON.parse(document.querySelector('#data').innerHTML);
+        const ctx = document.getElementById('myChart').getContext('2d');
+
+
+        const dat = {
+            datasets: [{
+                label: 'All problems',
+                borderColor: 'gray',
+                data: data.map(x => new Object({
+                    x: moment(x.date).format('LLLL'),
+                    y: +x.problems
+                }))
+            }, {
+                label: 'Errors',
+                borderColor: 'red',
+                data: data.map(x => new Object({
+                    x: moment(x.date).format('LLLL'),
+                    y: +x.errors
+                }))
+            }, {
+                label: 'Warnings',
+                borderColor: 'gold',
+                data: data.map(x => new Object({
+                    x: moment(x.date).format('LLLL'),
+                    y: x.warnings
+                }))
+            }]
+        };
+
+        const chart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'line',
+
+            // The data for our dataset
+            data: dat,
+
+            // Configuration options go here
+            options: {
+                responsive: true,
+                scales: {
+                    xAxes: [{
+                        type: 'time',
+                        time: {
+                            unit: 'month'
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

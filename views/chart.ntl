@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0
+        }
+        .mois {
+            position: relative;
+            width: 100vw
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mois" >
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <script id="data" type="application/json">
+        #data#
+    </script>
+
+    <script>
+        const data = JSON.parse(document.querySelector('#data').innerHTML);
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const chart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'line',
+
+            // The data for our dataset
+            data: {
+                labels: data.map(x => x.date),
+                datasets: [{
+                    label: 'All problems',
+                    // backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'gray',
+                    data: data.map(x => x.problems)
+                },{
+                    label: 'Errors',
+                    // backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'red',
+                    data: data.map(x => x.errors)
+                },{
+                    label: 'Warnings',
+                    // backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'gold',
+                    data: data.map(x => x.warnings)
+                }]
+            },
+
+            // Configuration options go here
+            options: {}
+        });
+    </script>
+</body>
+
+</html>

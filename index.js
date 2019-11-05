@@ -53,6 +53,41 @@ app.get('/check', function(req, res) {
   res.render('check');
 });
 
+app.get('/test', function(req, res) {
+  res.render('test');
+});
+
+
+app.get('/chart', function(req, res) {
+  const data = require('./info.json');
+  const moment = require('moment');
+
+  moment.locale('ru');
+  const result = data.history.map(x => new Object({
+      date: moment.utc(x.date).format('LL'),
+      problems: x.info.problems,
+      errors: x.info.errors,
+      warnings: x.info.warnings
+  }))
+
+  res.render('chart', {options: {data: JSON.stringify(result)}});
+});
+
+app.get('/timechart', function(req, res) {
+  const data = require('./info.json');
+  const moment = require('moment');
+
+  moment.locale('ru');
+  const result = data.history.map(x => new Object({
+      date: x.date,
+      problems: x.info.problems,
+      errors: x.info.errors,
+      warnings: x.info.warnings
+  }))
+
+  res.render('timechart', {options: {data: JSON.stringify(result)}});
+});
+
 app.get('/config', function(req, res) {
   const config = JSON.parse(fs.readFileSync('/public/eslintrc.json', 'utf8'));
   res.send(config);
@@ -60,16 +95,6 @@ app.get('/config', function(req, res) {
 
 app.get('/eslintrc', function(req, res) {
   res.sendFile(path.resolve('public/eslintrc.json'));
-});
-
-app.get('/time', function(req, res) {
-  const history = fs.readFileSync('info.json', 'utf8');
-
-  res.render('time', {
-    options: {
-      history
-    }
-  });
 });
 
 app.get('/ip', (req, res) => {
