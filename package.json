@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "watch": "nodemon --watch app",
+    "watch": "nodemon --watch src/src.js --watch views/styles.scss",
     "scss": "npx node-sass --include-path node_modules --output-style nested views/style.scss > public/styles/style.css"
   },
   "repository": {

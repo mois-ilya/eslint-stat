@@ -22,11 +22,30 @@ html, body {
   --color-label: #ccc;
   --color-main: rgb(59,63,65); }
 
+.left-menu {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  padding-top: 20px;
+  width: 220px;
+  border-right: 2px solid var(--color-body); }
+  .left-menu h2, .left-menu p {
+    color: var(--color-label); }
+  .left-menu p {
+    margin: 0; }
+  .left-menu a {
+    color: var(--color-header); }
+
+.right-body {
+  height: 100vh;
+  width: calc(100vw - 220px - 20px);
+  display: flex;
+  align-items: center; }
+
 .wrapper {
   height: 100vh;
   width: 100vw;
   display: flex;
-  align-items: center;
   background-color: var(--color-main); }
 
 .container, .card {

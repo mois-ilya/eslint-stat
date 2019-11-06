@@ -89,7 +89,7 @@ app.get('/timechart', function(req, res) {
 });
 
 app.get('/config', function(req, res) {
-  const config = JSON.parse(fs.readFileSync('/public/eslintrc.json', 'utf8'));
+  const config = JSON.parse(fs.readFileSync('./public/eslintrc.json', 'utf8'));
   res.send(config);
 });
 

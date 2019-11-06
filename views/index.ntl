@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <link rel="stylesheet" href="./styles/bootstrap.css">
     <style></style>
 </head>
+
 <body>
     <link rel="stylesheet" href="./styles/style.css">
     <input type="checkbox" name="mode" id="mode">
@@ -16,26 +18,41 @@
         <span class="slider round"></span>
     </label>
     <div class="wrapper">
-        <div class="card text-center">
-            <div class="card-header">
-                ESLint Problems #vconfig#
-            </div>
-            <div class="card-body">
-                <div class="label-problems">#allProblems#</div>
-                <div class="all-problems all-problems__label">All problems:</div>
-                <div class="all-problems all-problems__errors">#errors# errors</div>
-                <div class="all-problems all-problems__warnings">#warns# warnings</div>
-                <div class="fixible-problems fixible-problems__label">Fixable problems:</div>
-                <div class="fixible-problems fixible-problems__errors">#fixErrors# errors</div>
-                <div class="fixible-problems fixible-problems__warnings">#fixWarns# warnings</div>
-                <div class="button-box">
-                    <button class="btn btn-light newlint">
-                        NEW LINT
-                    </button>
+        <div class="left-menu">
+            <h2>ESLint links</h2>
+            <a href="./timechart">Timechart lints</a>
+            <a href="./config">Config file</a>
+            <hr>
+            <p>fileStat (<a href="./fileStat">json</a>/<a href="./fileStat?format=html">html</a>)</p>
+            <p>History (<a href="./all">json</a>/<a href="./all?format=html">html</a>)</p>
+            <p>Last lint (<a href="./last">json</a>/<a href="./all?last=html">html</a>)</p>
+            <hr>
+            <h2>Pages</h2>
+            <a href="./check">check</a>
+            <a href="./test">test</a>
+        </div>
+        <div class="right-body">
+            <div class="card text-center">
+                <div class="card-header">
+                    ESLint Problems #vconfig#
                 </div>
-            </div>
-            <div class="card-footer text-muted time">
-                #time#
+                <div class="card-body">
+                    <div class="label-problems">#allProblems#</div>
+                    <div class="all-problems all-problems__label">All problems:</div>
+                    <div class="all-problems all-problems__errors">#errors# errors</div>
+                    <div class="all-problems all-problems__warnings">#warns# warnings</div>
+                    <div class="fixible-problems fixible-problems__label">Fixable problems:</div>
+                    <div class="fixible-problems fixible-problems__errors">#fixErrors# errors</div>
+                    <div class="fixible-problems fixible-problems__warnings">#fixWarns# warnings</div>
+                    <div class="button-box">
+                        <button class="btn btn-light newlint">
+                            NEW LINT
+                        </button>
+                    </div>
+                </div>
+                <div class="card-footer text-muted time">
+                    #time#
+                </div>
             </div>
         </div>
     </div>
@@ -43,4 +60,5 @@
 
     <script src="./scripts/app.js"></script>
 </body>
+
 </html>
