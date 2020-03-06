@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Test</title>
+    <style>
+        body, html {
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            max-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .content {
+            overflow: auto;
+            flex: 1 1 auto;
+            background-color: #eee;
+        }
+
+        .content_heigth {
+            padding-top: 100%
+        }
+
+        .footer {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">Header</div>
+        <div class="Aalarm">toster</div>
+        <div class="content">
+            Content
+            <div class="content_heigth">Ll</div>
+        </div>
+        <div class="footer">FoOOoter</div>
+    </div>
+</body>
+</html>

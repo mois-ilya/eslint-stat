@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "watch": "nodemon --watch src/src.js --watch views/styles.scss",
+    "serve": "node index.js",
     "scss": "npx node-sass --include-path node_modules --output-style nested views/style.scss > public/styles/style.css"
   },
   "repository": {

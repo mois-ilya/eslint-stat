@@ -57,22 +57,6 @@ app.get('/test', function(req, res) {
   res.render('test');
 });
 
-
-app.get('/chart', function(req, res) {
-  const data = require('./info.json');
-  const moment = require('moment');
-
-  moment.locale('ru');
-  const result = data.history.map(x => new Object({
-      date: moment.utc(x.date).format('LL'),
-      problems: x.info.problems,
-      errors: x.info.errors,
-      warnings: x.info.warnings
-  }))
-
-  res.render('chart', {options: {data: JSON.stringify(result)}});
-});
-
 app.get('/timechart', function(req, res) {
   const data = require('./info.json');
   const moment = require('moment');
@@ -86,6 +70,21 @@ app.get('/timechart', function(req, res) {
   }))
 
   res.render('timechart', {options: {data: JSON.stringify(result)}});
+});
+
+app.get('/api/timechart', function(req, res) {
+  const data = require('./info.json');
+  const moment = require('moment');
+
+  moment.locale('ru');
+  const result = data.history.map(x => new Object({
+      date: x.date,
+      problems: x.info.problems,
+      errors: x.info.errors,
+      warnings: x.info.warnings
+  }))
+
+  res.send(result);
 });
 
 app.get('/config', function(req, res) {
@@ -104,7 +103,7 @@ app.get('/ip', (req, res) => {
 
 app.get('/new', newLint);
 
-app.get('/last', function(req, res) {
+app.get(['/last', '/api/last'], function(req, res) {
   const last = JSON.stringify(getLast());
   res.send(formatJson(last, req));
 });
@@ -133,6 +132,7 @@ function getLast() {
 }
 
 function newLint(req, res) {
+  const clientIp = res ? getClientIp(req) : '';
   exec(`cleartool update`, {cwd: cwd}, () => {
       exec(`describe.bat`, (error, r) => {
         const tag = r.split('\n')[0];
@@ -145,21 +145,28 @@ function newLint(req, res) {
         }
 
         exec(`eslint . --no-color -o ${__dirname}/lastLint.st`, {cwd: cwd}, () => {
-          console.log('lint complited');
+          if (res) {
+            console.log(`user lint complited ${clientIp}`);
+          } else {
+            console.log(`auto lint complited`);
+          }
+
           const readedFile = fs.readFileSync('lastLint.st', 'utf8');
-          const result = parse(readedFile, tag);
+          const result = parse(readedFile, tag, clientIp);
           createFileStat();
 
           infoObject.history.push(result);
           fs.writeFileSync("info.json", JSON.stringify(infoObject, null, '\t'))
 
-          res.send(result);
+          if (res) {
+            res.send(result);
+          }
       })
     })
   })
 }
 
-function parse(contents, vconfig) {
+function parse(contents, vconfig, ip) {
     const arrayLines = contents.split('\n');
     const lLines = arrayLines.length;
     const arrayLastLines = arrayLines.slice(lLines - 3, lLines - 1);
@@ -168,7 +175,8 @@ function parse(contents, vconfig) {
       date: new Date(),
       info: parseFirst(arrayLastLines),
       fix: parseSecond(arrayLastLines),
-      vconfig: vconfig
+      vconfig: vconfig,
+      userIP: ip || 'auto'
     }
 
     return result;
@@ -223,3 +231,5 @@ function getClientIp(req) {
   }
   return ipAddress;
 };
+
+setInterval(newLint, 1000 * 60 * 60 * 24)
